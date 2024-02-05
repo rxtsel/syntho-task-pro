@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix"
+    "lint": "eslint \"*/**/*.{js,ts,jsx,tsx}\" --fix",
+    "prepare": "husky install"
   },
   "dependencies": {
     "react": "^18",
@@ -26,6 +27,7 @@
     "postcss": "^8",
     "prettier": "3.2.5",
     "tailwindcss": "^3.3.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "husky": "^8.0.0"
   }
 }
