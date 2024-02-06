@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { FC } from 'react'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
+import type { TLanguage } from '@/types'
 import { ThemeProvider } from '../components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -15,7 +16,7 @@ export const metadata: Metadata = {
 interface Props {
   children: React.ReactNode
   params: {
-    locale: 'en' | 'es'
+    locale: TLanguage
   }
 }
 
