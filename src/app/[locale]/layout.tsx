@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { FC } from 'react'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { ThemeProvider } from '../components/ThemeProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,7 +24,11 @@ const RootLayout: FC<Props> = ({ children, params: { locale } }) => {
   return (
     <html lang={locale}>
       <body className={inter.className}>
-        <NextIntlClientProvider messages={messages}>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
+          <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   )
