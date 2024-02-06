@@ -9,10 +9,7 @@ export default createMiddleware({
   defaultLocale: 'en'
 })
 
-// this return a string like "en|es|fr"
-const locales = KEYS_OF_LANGUAGES.join('|')
-
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', `/(${locales})/:path*`]
+  matcher: ['/', '/(en|es)/:path*']
 }
