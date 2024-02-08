@@ -1,5 +1,5 @@
 import { useTranslations } from 'next-intl'
-import { ToggleTheme } from '../components'
+import { ToggleTheme } from '@/components'
 
 export default function Home() {
   const t = useTranslations('site')

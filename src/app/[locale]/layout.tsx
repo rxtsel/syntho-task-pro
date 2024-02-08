@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
-import './globals.css'
+import '@/styles/globals.css'
 import { FC } from 'react'
 import { NextIntlClientProvider, useMessages } from 'next-intl'
 import type { TLanguage } from '@/types'
-import { ThemeProvider } from '../components/ThemeProvider'
+import { ThemeProvider } from '@/components'
 
 export const metadata: Metadata = {
   title: 'SynthoTask Pro'
