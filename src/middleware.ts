@@ -1,15 +1,18 @@
-import createMiddleware from 'next-intl/middleware'
 import { KEYS_OF_LANGUAGES } from '@/constants'
+import createMiddleware from 'next-intl/middleware'
+import type { NextRequest } from 'next/server'
+import { NextResponse } from 'next/server'
 
-export default createMiddleware({
-  // A list of all locales that are supported
+const nextIntlMiddleware = createMiddleware({
   locales: KEYS_OF_LANGUAGES,
-
-  // Used when no locale matches
   defaultLocale: 'en'
 })
 
+export default function middleware(req: NextRequest): NextResponse {
+  return nextIntlMiddleware(req)
+}
+
 export const config = {
   // Match only internationalized pathnames
-  matcher: ['/', '/(en|es)/:path*']
+  matcher: ['/((?!api|_next|.*\\..*).*)']
 }
