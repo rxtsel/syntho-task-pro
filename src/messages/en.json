@@ -27,5 +27,6 @@
       "forgotPassword": "Forgot password?",
       "recoverPassword": "Recover password"
     }
-  }
+  },
+  "footer": "Made with <hear></hear> by <rxtsel>@rxtsel</rxtsel>."
 }

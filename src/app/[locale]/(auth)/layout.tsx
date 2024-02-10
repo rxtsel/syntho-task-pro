@@ -1,4 +1,4 @@
-import { ToggleTheme } from '@/components'
+import { Footer, ToggleTheme } from '@/components'
 import { ROUTES } from '@/constants'
 import { AuthButton } from './components'
 
@@ -36,6 +36,7 @@ const layout = (props: Props) => {
       <main className='container relative min-h-[calc(100dvh-172px)] grid place-items-center lg:max-w-none lg:px-0'>
         {children}
       </main>
+      <Footer />
     </>
   )
 }

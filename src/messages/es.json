@@ -27,5 +27,6 @@
       "forgotPassword": "¿Olvidaste la contraseña?",
       "recoverPassword": "Recuperar contraseña"
     }
-  }
+  },
+  "footer": "Hecho con <hear></hear> por <rxtsel>@rxtsel</rxtsel>."
 }
