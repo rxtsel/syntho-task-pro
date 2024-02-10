@@ -1,5 +1,31 @@
 {
   "site": {
-    "title": "SynthoTask Pro Ingles"
+    "title": "SynthoTask Pro"
+  },
+  "auth": {
+    "signIn": {
+      "title": "Welcome to SynthoTask Pro",
+      "desc": "Enter your email below to log in to your account"
+    },
+    "signUp": {
+      "title": "Create an account",
+      "desc": "Enter your email below to create your account"
+    },
+    "forgotPassword": {
+      "title": "Forgot your password?",
+      "desc": "Enter your email below to reset your password"
+    },
+    "orContinueWith": "or continue with",
+    "policies": "By signing up, you are agreeing to our <terms>Terms of Service</terms> and <privacy>Privacy Policy</privacy>."
+  },
+  "buttons": {
+    "auth": {
+      "signInWithEmail": "Sign in with email",
+      "SignUpWithEmail": "Sign up with email",
+      "signIn": "Sign in",
+      "signUp": "Sign up",
+      "forgotPassword": "Forgot password?",
+      "recoverPassword": "Recover password"
+    }
   }
 }

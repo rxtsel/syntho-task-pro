@@ -7,10 +7,13 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { useTranslations } from 'next-intl'
 
 interface SignInFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function SignInForm({ className, ...props }: SignInFormProps) {
+  const t = useTranslations()
+
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
   async function onSubmit(event: React.SyntheticEvent) {
@@ -59,7 +62,7 @@ export function SignInForm({ className, ...props }: SignInFormProps) {
 
           <Button disabled={isLoading}>
             {isLoading && <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />}
-            Sign In with Email
+            {t('buttons.auth.signInWithEmail')}
           </Button>
         </div>
       </form>
@@ -68,7 +71,7 @@ export function SignInForm({ className, ...props }: SignInFormProps) {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
+          <span className='bg-background px-2 text-muted-foreground'>{t('auth.orContinueWith')}</span>
         </div>
       </div>
       <Button variant='outline' type='button' disabled={isLoading}>

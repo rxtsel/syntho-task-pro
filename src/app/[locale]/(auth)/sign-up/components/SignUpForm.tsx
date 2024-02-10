@@ -2,16 +2,19 @@
 
 import * as React from 'react'
 
-import { cn } from '@/utils/utils'
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { cn } from '@/utils/utils'
+import { useTranslations } from 'next-intl'
 
 interface SignUpFormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export function SignUpForm({ className, ...props }: SignUpFormProps) {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
+
+  const t = useTranslations()
 
   async function onSubmit(event: React.SyntheticEvent) {
     event.preventDefault()
@@ -43,7 +46,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           </div>
           <Button disabled={isLoading}>
             {isLoading && <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />}
-            Sign Up with Email
+            {t('buttons.auth.SignUpWithEmail')}
           </Button>
         </div>
       </form>
@@ -52,7 +55,7 @@ export function SignUpForm({ className, ...props }: SignUpFormProps) {
           <span className='w-full border-t' />
         </div>
         <div className='relative flex justify-center text-xs uppercase'>
-          <span className='bg-background px-2 text-muted-foreground'>Or continue with</span>
+          <span className='bg-background px-2 text-muted-foreground'>{t('auth.orContinueWith')}</span>
         </div>
       </div>
       <Button variant='outline' type='button' disabled={isLoading}>
