@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import Link from 'next/link'
 
 import { SignInForm } from './components/SignInForm'
+import { ROUTES } from '@/constants'
 
 export const metadata: Metadata = {
   title: 'Sign In',
@@ -19,9 +20,12 @@ export default function AuthenticationPage() {
           </div>
           <SignInForm />
           <div className='px-0 text-sm text-right'>
-            <Link href='#' className='underline underline-offset-4 hover:text-primary text-muted-foreground'>
+            <Link
+              href={ROUTES.auth.forgotPassword}
+              className='underline underline-offset-4 hover:text-primary text-muted-foreground'
+            >
               Forgot your password?
-            </Link>{' '}
+            </Link>
           </div>
         </div>
       </div>

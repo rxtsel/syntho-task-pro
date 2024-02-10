@@ -1,8 +1,6 @@
 import { ToggleTheme } from '@/components'
-import { buttonVariants } from '@/components/ui/button'
-import { cn } from '@/utils/utils'
-import Link from 'next/link'
-import React from 'react'
+import { ROUTES } from '@/constants'
+import { AuthButton } from './components'
 
 interface Props {
   children: React.ReactNode
@@ -10,10 +8,11 @@ interface Props {
 
 const layout = (props: Props) => {
   const { children } = props
+
   return (
     <>
       <header className='flex items-center justify-between mt-8 mx-8'>
-        <a href='/' className='flex items-center text-lg font-medium'>
+        <a href={ROUTES.root} className='flex items-center text-lg font-medium'>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             viewBox='0 0 24 24'
@@ -29,11 +28,9 @@ const layout = (props: Props) => {
           SyntoTask Pro
         </a>
 
-        <div className='flex items-center'>
+        <div className='flex items-center gap-1'>
           <ToggleTheme />
-          <Link href='#' className={cn(buttonVariants({ variant: 'ghost' }), '')}>
-            Login
-          </Link>
+          <AuthButton />
         </div>
       </header>
       <main className='container relative min-h-[calc(100dvh-172px)] grid place-items-center lg:max-w-none lg:px-0'>
