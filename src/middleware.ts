@@ -1,12 +1,12 @@
-import { KEYS_OF_LANGUAGES } from '@/constants'
 import createMiddleware from 'next-intl/middleware'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
+import { locales, localePrefix } from '@/config'
 
 const nextIntlMiddleware = createMiddleware({
-  locales: KEYS_OF_LANGUAGES,
-  defaultLocale: 'en',
-  localePrefix: 'as-needed'
+  locales,
+  localePrefix,
+  defaultLocale: 'en'
 })
 
 export default function middleware(req: NextRequest): NextResponse {

@@ -1,4 +1,4 @@
-import { Footer, ToggleTheme } from '@/components'
+import { Footer, LocaleSwitcher, ToggleTheme } from '@/components'
 import { ROUTES } from '@/constants'
 import { AuthButton } from './components'
 
@@ -29,6 +29,7 @@ const layout = (props: Props) => {
         </a>
 
         <div className='flex items-center gap-2'>
+          <LocaleSwitcher />
           <ToggleTheme />
           <AuthButton />
         </div>
