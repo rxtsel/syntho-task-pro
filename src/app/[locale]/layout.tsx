@@ -6,7 +6,26 @@ import type { TLanguage } from '@/types'
 import { ThemeProvider } from '@/components'
 
 export const metadata: Metadata = {
-  title: 'SynthoTask Pro'
+  title: {
+    default: 'SyntoTask Pro',
+    template: '%s · SyntoTask Pro'
+  },
+  icons: [
+    {
+      type: 'image/svg+xml',
+      sizes: 'any',
+      url: '/logo-dark.svg',
+      href: '/logo-dark.svg',
+      media: '(prefers-color-scheme: light)'
+    },
+    {
+      type: 'image/svg+xml',
+      sizes: 'any',
+      url: '/logo-light.svg',
+      href: '/logo-light.svg',
+      media: '(prefers-color-scheme: dark)'
+    }
+  ]
 }
 
 // intl
