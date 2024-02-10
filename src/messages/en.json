@@ -9,7 +9,7 @@
     },
     "signUp": {
       "title": "Create an account",
-      "desc": "Enter your email below to create your account"
+      "desc": "Enter the following data to create your account"
     },
     "forgotPassword": {
       "title": "Forgot your password?",
