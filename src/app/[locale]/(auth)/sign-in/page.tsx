@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { SignInForm } from './components/SignInForm'
 
 export const metadata: Metadata = {
-  title: 'login to SyntoTask Pro',
+  title: 'Sign In',
   description: 'Create an account in SyntoTask Pro to start managing your tasks and projects.'
 }
 
