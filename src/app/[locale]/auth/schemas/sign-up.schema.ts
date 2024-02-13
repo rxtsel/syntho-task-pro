@@ -9,22 +9,6 @@ type T = (key: string, params?: MessageParams) => string
 export const formSignUpSchema = (t: T) =>
   z
     .object({
-      firstName: z
-        .string()
-        .min(3, {
-          message: t('messages.minCharacters', { name: t('messages.firstName').toLowerCase(), qty: 3 })
-        })
-        .max(50, {
-          message: t('messages.maxCharacters', { name: t('messages.firstName').toLowerCase(), qty: 50 })
-        }),
-      lastName: z
-        .string()
-        .min(3, {
-          message: t('messages.minCharacters', { name: t('messages.lastName').toLowerCase(), qty: 3 })
-        })
-        .max(50, {
-          message: t('messages.maxCharacters', { name: t('messages.lastName').toLowerCase(), qty: 50 })
-        }),
       email: z.string().email({
         message: t('messages.invalidEmail')
       }),

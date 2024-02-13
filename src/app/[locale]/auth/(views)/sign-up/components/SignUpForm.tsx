@@ -1,7 +1,5 @@
 'use client'
 
-import * as React from 'react'
-
 import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
@@ -10,33 +8,29 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { formSignInSchema } from '../../schemas'
+import { formSignUpSchema } from '../../../schemas'
 
-export const SignInForm = () => {
-  const t = useTranslations()
-
+export const SignUpForm = () => {
   const isLoading = false
-
-  const formSchema = formSignInSchema(t)
+  const t = useTranslations()
+  const formSchema = formSignUpSchema(t)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: '',
-      password: ''
+      password: '',
+      confirmPassword: ''
     }
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values
+    console.log(email, password)
   }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
+      <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
         <div className='grid gap-2'>
           <FormField
             control={form.control}
@@ -45,22 +39,12 @@ export const SignInForm = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input
-                    autoFocus
-                    id='email'
-                    placeholder='name@example.com'
-                    type='email'
-                    autoCapitalize='none'
-                    autoComplete='email'
-                    autoCorrect='off'
-                    {...field}
-                  />
+                  <Input type='email' placeholder='email@example.com' autoComplete='email' {...field} />
                 </FormControl>
                 <FormMessage className='text-xs' />
               </FormItem>
             )}
           />
-
           <FormField
             control={form.control}
             name='password'
@@ -70,7 +54,24 @@ export const SignInForm = () => {
                 <FormControl>
                   <Input
                     type='password'
-                    id='password'
+                    autoComplete='off'
+                    placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className='text-xs' />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name='confirmPassword'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>{t('messages.confirmPassword')}</FormLabel>
+                <FormControl>
+                  <Input
+                    type='password'
                     autoComplete='off'
                     placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
                     {...field}
@@ -82,9 +83,8 @@ export const SignInForm = () => {
           />
         </div>
 
-        <Button disabled={isLoading} className='w-full'>
-          {isLoading && <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />}
-          {t('buttons.auth.signInWithEmail')}
+        <Button className='w-full' type='submit'>
+          {t('buttons.auth.signUp')}
         </Button>
 
         <div className='relative'>
@@ -95,8 +95,7 @@ export const SignInForm = () => {
             <span className='bg-background px-2 text-muted-foreground'>{t('auth.orContinueWith')}</span>
           </div>
         </div>
-
-        <Button variant='outline' type='button' disabled={isLoading} className='w-full'>
+        <Button className='w-full' variant='outline' type='button' disabled={isLoading}>
           {isLoading ? (
             <Icons.spinner className='mr-2 h-4 w-4 animate-spin' />
           ) : (
