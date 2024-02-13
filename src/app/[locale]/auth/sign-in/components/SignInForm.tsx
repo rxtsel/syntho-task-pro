@@ -70,6 +70,7 @@ export const SignInForm = () => {
                 <FormControl>
                   <Input
                     type='password'
+                    id='password'
                     autoComplete='off'
                     placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
                     {...field}

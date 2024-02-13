@@ -37,7 +37,8 @@
     "maxCharacters": "{name} must be at most {qty} characters long",
     "invalidEmail": "Invalid email address",
     "passwordMatch": "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
-    "passwordNotMatch": "Passwords do not match"
+    "passwordNotMatch": "Passwords do not match",
+    "passwordRequired": "Password is required"
   },
   "footer": "Made with <hear></hear> by <rxtsel>@rxtsel</rxtsel>."
 }
