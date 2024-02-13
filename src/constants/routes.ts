@@ -9,3 +9,5 @@ export const ROUTES = {
     dashboard: '/dashboard'
   }
 }
+
+export const PRIVATE_ROUTES = Object.values(ROUTES.private)
