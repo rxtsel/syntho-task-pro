@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl'
 export const Footer = () => {
   const t = useTranslations()
   return (
-    <footer className='w-full text-center mt-14 text-sm text-muted-foreground'>
+    <footer className='w-full text-center mt-14 text-sm text-muted-foreground pb-3 md:pb-0'>
       <p>
         &copy; 2022 - {new Date().getFullYear()}.{' '}
         {t.rich('footer', {
