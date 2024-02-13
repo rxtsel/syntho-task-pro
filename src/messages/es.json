@@ -9,7 +9,7 @@
     },
     "signUp": {
       "title": "Crear una cuenta",
-      "desc": "Ingresa tu email a continuación para crear tu cuenta"
+      "desc": "Regístrate para comenzar con SynthoTask Pro"
     },
     "forgotPassword": {
       "title": "¿Olvidaste tu contraseña?",
@@ -27,6 +27,17 @@
       "forgotPassword": "¿Olvidaste la contraseña?",
       "recoverPassword": "Recuperar contraseña"
     }
+  },
+  "messages": {
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "minCharacters": "El {name} debe tener al menos {qty} caracteres de longitud",
+    "maxCharacters": "El {name} debe tener como máximo {qty} caracteres de longitud",
+    "invalidEmail": "Dirección de correo electrónico no válida",
+    "passwordMatch": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
+    "passwordNotMatch": "Las contraseñas no coinciden"
   },
   "footer": "Hecho con <hear></hear> por <rxtsel>@rxtsel</rxtsel>."
 }
