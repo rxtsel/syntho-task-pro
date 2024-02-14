@@ -4,22 +4,22 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { signUp } from '@/services'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { formSignUpSchema } from '../../../schemas'
-import { signUp } from '@/services'
-import { useToastStore } from '@/stores'
-import { ROUTES } from '@/constants'
+// import { ROUTES } from '@/constants'
 import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+import { type AxiosError } from 'axios'
 
 export const SignUpForm = () => {
   const isLoading = false
   const t = useTranslations()
   const formSchema = formSignUpSchema(t)
   const router = useRouter()
-  const toast = useToastStore(state => state.showToast)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -34,12 +34,24 @@ export const SignUpForm = () => {
     const { email, password } = values
 
     try {
+      toast.loading('Loading...')
       await signUp(email, password)
-      toast({ message: `Te hemos enviado un email de confirmación a ${email}`, type: 'success' })
-      router.push(ROUTES.private.dashboard)
-    } catch (error) {
-      console.error(error)
-      toast({ message: 'Ha ocurrido un error al registrarte, por favor, intenta de nuevo.', type: 'error' })
+      toast.success(`Hemos enviado un correo de confirmación a ${email}.`)
+      router.refresh()
+    } catch (error: AxiosError | any) {
+      if (error.response.status === 429) {
+        toast.error('Demasiados intentos. Por favor, intenta de nuevo en unos minutos.')
+        throw error
+      }
+
+      if (error.response.status === 400) {
+        toast.error('El correo ya está en uso.')
+        throw error
+      }
+
+      toast.error(error.code)
+    } finally {
+      toast.dismiss()
     }
   }
   return (

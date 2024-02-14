@@ -6,8 +6,6 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ROUTES } from '@/constants'
-import { useToastStore } from '@/stores'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
@@ -15,12 +13,14 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { formSignInSchema } from '../../../schemas'
+import { toast } from 'sonner'
+import { login } from '@/services'
+import { AxiosError } from 'axios'
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
 
   const t = useTranslations()
-  const toast = useToastStore(state => state.showToast)
   const router = useRouter()
 
   const formSchema = formSignInSchema(t)
@@ -35,6 +35,16 @@ export const LoginForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { email, password } = values
+    try {
+      toast.loading('Loading...')
+      await login(email, password)
+      toast.success('Welcome back!')
+      router.refresh()
+    } catch (error: AxiosError | any) {
+      toast.error(error.code)
+    } finally {
+      toast.dismiss()
+    }
   }
 
   return (

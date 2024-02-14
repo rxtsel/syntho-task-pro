@@ -1,6 +1,7 @@
 export const ROUTES = {
   root: '/',
   auth: {
+    auth: '/auth',
     login: '/auth/login',
     register: '/auth/sign-up',
     forgotPassword: '/auth/forgot-password'
@@ -17,6 +18,7 @@ export const API_ROUTES = {
     base: '/api/auth',
     login: '/login',
     signUp: '/sign-up',
+    logout: '/logout',
     forgotPassword: '/forgot-password',
     callback: '/callback'
   }
