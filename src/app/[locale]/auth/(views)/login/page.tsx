@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
 
-import { SignInForm } from './components/SignInForm'
+import { LoginForm } from './components/LoginForm'
 import { ROUTES } from '@/constants'
 import { useTranslations } from 'next-intl'
 
@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: 'Create an account in SyntoTask Pro to start managing your tasks and projects.'
 }
 
-export default function AuthenticationPage() {
+const AuthenticationPage = () => {
   const t = useTranslations()
   return (
     <>
@@ -20,7 +20,7 @@ export default function AuthenticationPage() {
             <h1 className='text-2xl font-semibold tracking-tight'>{t('auth.signIn.title')}</h1>
             <p className='text-sm text-muted-foreground'>{t('auth.signIn.desc')}</p>
           </div>
-          <SignInForm />
+          <LoginForm />
           <div className='px-0 text-sm text-right'>
             <Link
               href={ROUTES.auth.forgotPassword}
@@ -34,3 +34,5 @@ export default function AuthenticationPage() {
     </>
   )
 }
+
+export default AuthenticationPage

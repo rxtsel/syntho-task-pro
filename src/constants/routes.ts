@@ -1,7 +1,7 @@
 export const ROUTES = {
   root: '/',
   auth: {
-    login: '/auth/sign-in',
+    login: '/auth/login',
     register: '/auth/sign-up',
     forgotPassword: '/auth/forgot-password'
   },
@@ -11,3 +11,13 @@ export const ROUTES = {
 }
 
 export const PRIVATE_ROUTES = Object.values(ROUTES.private)
+
+export const API_ROUTES = {
+  auth: {
+    base: '/api/auth',
+    login: '/login',
+    signUp: '/sign-up',
+    forgotPassword: '/forgot-password',
+    callback: '/callback'
+  }
+}

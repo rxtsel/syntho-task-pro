@@ -6,16 +6,22 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ROUTES } from '@/constants'
+import { useToastStore } from '@/stores'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { formSignInSchema } from '../../../schemas'
 
-export const SignInForm = () => {
-  const t = useTranslations()
+export const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false)
 
-  const isLoading = false
+  const t = useTranslations()
+  const toast = useToastStore(state => state.showToast)
+  const router = useRouter()
 
   const formSchema = formSignInSchema(t)
 
@@ -27,11 +33,8 @@ export const SignInForm = () => {
     }
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values
   }
 
   return (

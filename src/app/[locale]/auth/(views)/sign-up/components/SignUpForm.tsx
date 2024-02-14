@@ -9,11 +9,17 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { formSignUpSchema } from '../../../schemas'
+import { signUp } from '@/services'
+import { useToastStore } from '@/stores'
+import { ROUTES } from '@/constants'
+import { useRouter } from 'next/navigation'
 
 export const SignUpForm = () => {
   const isLoading = false
   const t = useTranslations()
   const formSchema = formSignUpSchema(t)
+  const router = useRouter()
+  const toast = useToastStore(state => state.showToast)
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -26,7 +32,15 @@ export const SignUpForm = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { email, password } = values
-    console.log(email, password)
+
+    try {
+      await signUp(email, password)
+      toast({ message: `Te hemos enviado un email de confirmación a ${email}`, type: 'success' })
+      router.push(ROUTES.private.dashboard)
+    } catch (error) {
+      console.error(error)
+      toast({ message: 'Ha ocurrido un error al registrarte, por favor, intenta de nuevo.', type: 'error' })
+    }
   }
   return (
     <Form {...form}>
