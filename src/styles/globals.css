@@ -75,11 +75,10 @@
   }
 }
 
-.toast-success svg {
+li[data-type='success'] svg {
   @apply fill-green-500;
 }
 
-.toast-error svg {
+li[data-type='error'] svg {
   @apply fill-red-500;
 }
-
