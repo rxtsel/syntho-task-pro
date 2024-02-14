@@ -2,7 +2,7 @@
 
 import { buttonVariants } from '@/components/ui/button'
 import { ROUTES } from '@/constants'
-import { cn } from '@/utils/utils'
+import { cn } from '@/lib/utils'
 import { useTranslations } from 'next-intl'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
