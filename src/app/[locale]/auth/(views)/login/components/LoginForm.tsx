@@ -36,14 +36,17 @@ export const LoginForm = () => {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const { email, password } = values
     try {
+      setIsLoading(true)
       toast.loading('Loading...')
       await login(email, password)
       toast.success('Welcome back!')
       router.refresh()
     } catch (error: AxiosError | any) {
+      setIsLoading(true)
       toast.error(error.code)
     } finally {
       toast.dismiss()
+      setIsLoading(false)
     }
   }
 

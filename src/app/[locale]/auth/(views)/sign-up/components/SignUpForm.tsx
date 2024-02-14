@@ -10,10 +10,10 @@ import { useTranslations } from 'next-intl'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { formSignUpSchema } from '../../../schemas'
-// import { ROUTES } from '@/constants'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 import { type AxiosError } from 'axios'
+import { ROUTES } from '@/constants'
 
 export const SignUpForm = () => {
   const isLoading = false
@@ -37,8 +37,8 @@ export const SignUpForm = () => {
       toast.loading('Loading...')
       await signUp(email, password)
       toast.success(`Hemos enviado un correo de confirmación a ${email}.`)
-      router.refresh()
-    } catch (error: AxiosError | any) {
+      router.push(ROUTES.root)
+    } catch (error: AxiosError) {
       if (error.response.status === 429) {
         toast.error('Demasiados intentos. Por favor, intenta de nuevo en unos minutos.')
         throw error
@@ -49,7 +49,7 @@ export const SignUpForm = () => {
         throw error
       }
 
-      toast.error(error.code)
+      toast.error(error.response.data.error)
     } finally {
       toast.dismiss()
     }
