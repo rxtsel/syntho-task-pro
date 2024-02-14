@@ -12,7 +12,6 @@ import { z } from 'zod'
 import { formSignUpSchema } from '../../../schemas'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
-import { type AxiosError } from 'axios'
 import { ROUTES } from '@/constants'
 
 export const SignUpForm = () => {
@@ -38,7 +37,7 @@ export const SignUpForm = () => {
       await signUp(email, password)
       toast.success(`Hemos enviado un correo de confirmación a ${email}.`)
       router.push(ROUTES.root)
-    } catch (error: AxiosError) {
+    } catch (error: any) {
       if (error.response.status === 429) {
         toast.error('Demasiados intentos. Por favor, intenta de nuevo en unos minutos.')
         throw error

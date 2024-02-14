@@ -15,7 +15,6 @@ import { z } from 'zod'
 import { formSignInSchema } from '../../../schemas'
 import { toast } from 'sonner'
 import { login } from '@/services'
-import { AxiosError } from 'axios'
 
 export const LoginForm = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -41,7 +40,7 @@ export const LoginForm = () => {
       await login(email, password)
       toast.success('Welcome back!')
       router.refresh()
-    } catch (error: AxiosError | any) {
+    } catch (error: any) {
       setIsLoading(true)
       toast.error(error.code)
     } finally {
