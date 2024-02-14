@@ -36,7 +36,7 @@
     "minCharacters": "{name} must be at least {qty} characters long",
     "maxCharacters": "{name} must be at most {qty} characters long",
     "invalidEmail": "Invalid email address",
-    "passwordMatch": "Password must contain at least one uppercase letter, one lowercase letter, one number and one special character",
+    "passwordMatch": "The password must contain at least one uppercase letter, one lowercase letter, and one special character",
     "passwordNotMatch": "Passwords do not match",
     "passwordRequired": "Password is required"
   },
