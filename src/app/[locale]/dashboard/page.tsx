@@ -8,10 +8,10 @@ const Dashboard = async () => {
   const supabase = createServerComponentClient<Database>({ cookies: () => cookieStore })
   const { data } = await supabase.from('workspaces').select()
   return (
-    <main className='grid min-h-screen place-items-center text-center'>
-      <h1 className='dark:text-white text-black text-sm font-medium font-sans'>Dashboard</h1>
+    <>
+      <h1 className='dark:text-white text-black text-6xl font-medium font-sans'>Welcome Back</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-    </main>
+    </>
   )
 }
 

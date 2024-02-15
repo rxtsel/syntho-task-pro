@@ -1,14 +1,12 @@
 'use client'
 
-import { Button, buttonVariants } from '@/components/ui/button'
 import { ROUTES } from '@/constants'
 import { Database } from '@/types/database.types'
-import { cn } from '@/utils/utils'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
-export const AuthButton = () => {
+export const LogoutButton = () => {
   const router = useRouter()
   const supabase = createClientComponentClient<Database>()
 
@@ -23,8 +21,8 @@ export const AuthButton = () => {
   }
 
   return (
-    <Button onClick={handleClick} className={cn(buttonVariants({ variant: 'default' }), '')}>
+    <button onClick={handleClick} className='w-full h-full text-left'>
       Logout
-    </Button>
+    </button>
   )
 }

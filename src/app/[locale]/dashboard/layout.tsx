@@ -1,6 +1,5 @@
-import { Footer, LocaleSwitcher, ToggleTheme } from '@/components'
-import { ROUTES } from '@/constants'
-import { AuthButton } from './components'
+import { Footer, Sidebar } from '@/components'
+import { Header } from './components/header'
 
 interface Props {
   children: React.ReactNode
@@ -11,33 +10,12 @@ const layout = (props: Props) => {
 
   return (
     <>
-      <header className='flex items-center justify-between my-8 mx-8'>
-        <a href={ROUTES.root} className='flex items-center text-lg font-medium'>
-          <svg
-            xmlns='http://www.w3.org/2000/svg'
-            viewBox='0 0 24 24'
-            fill='none'
-            stroke='currentColor'
-            strokeWidth='2'
-            strokeLinecap='round'
-            strokeLinejoin='round'
-            className='mr-2 h-6 w-6'
-          >
-            <path d='M15 6v12a3 3 0 1 0 3-3H6a3 3 0 1 0 3 3V6a3 3 0 1 0-3 3h12a3 3 0 1 0-3-3' />
-          </svg>
-          <span className='hidden md:block'>SyntoTask Pro</span>
-        </a>
-
-        <div className='flex items-center gap-2'>
-          <LocaleSwitcher />
-          <ToggleTheme />
-          <AuthButton />
-        </div>
-      </header>
-      <main className='container relative min-h-[calc(100dvh-192px)] grid place-items-center lg:max-w-none lg:px-0'>
-        {children}
+      <Header />
+      <main className='min-h-[100dvh] max-h-[100dvh] overflow-hidden lg:max-w-none lg:px-0 lg:grid lg:grid-cols-[288px,1fr]'>
+        <Sidebar />
+        <div className='h-full w-full relative top-10 lg:top-16 py-10 px-4 lg:p-10'>{children}</div>
       </main>
-      <Footer />
+      <Footer className='m-0 p-0 absolute bottom-0 lg:bottom-4' />
     </>
   )
 }

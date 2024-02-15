@@ -1,4 +1,6 @@
 export * from './ThemeProvider'
 export * from './ToggleTheme'
 export * from './LocaleSwitcher'
+export * from './nav-dashboard'
+export * from './sidebar'
 export * from './Footer'
