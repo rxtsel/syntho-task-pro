@@ -4,18 +4,19 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ROUTES } from '@/constants'
 import { signUp } from '@/services'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
 import { formSignUpSchema } from '../../../schemas'
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
-import { ROUTES } from '@/constants'
 
 export const SignUpForm = () => {
-  const isLoading = false
+  const [isLoading, setIsLoading] = useState(false)
   const t = useTranslations()
   const formSchema = formSignUpSchema(t)
   const router = useRouter()
@@ -33,11 +34,14 @@ export const SignUpForm = () => {
     const { email, password } = values
 
     try {
+      setIsLoading(true)
       toast.loading('Loading...')
       await signUp(email, password)
       toast.success(`Hemos enviado un correo de confirmación a ${email}.`)
       router.push(ROUTES.root)
+      form.reset()
     } catch (error: any) {
+      setIsLoading(true)
       if (error.response.status === 429) {
         toast.error('Demasiados intentos. Por favor, intenta de nuevo en unos minutos.')
         throw error
@@ -51,6 +55,7 @@ export const SignUpForm = () => {
       toast.error(error.response.data.error)
     } finally {
       toast.dismiss()
+      setIsLoading(false)
     }
   }
   return (
@@ -108,7 +113,7 @@ export const SignUpForm = () => {
           />
         </div>
 
-        <Button className='w-full' type='submit'>
+        <Button disabled={isLoading} className='w-full' type='submit'>
           {t('buttons.auth.signUp')}
         </Button>
 
