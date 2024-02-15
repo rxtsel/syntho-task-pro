@@ -36,8 +36,9 @@
     "minCharacters": "El {name} debe tener al menos {qty} caracteres de longitud",
     "maxCharacters": "El {name} debe tener como máximo {qty} caracteres de longitud",
     "invalidEmail": "Dirección de correo electrónico no válida",
-    "passwordMatch": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula, un número y un carácter especial",
-    "passwordNotMatch": "Las contraseñas no coinciden"
+    "passwordMatch": "La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un carácter especial",
+    "passwordNotMatch": "Las contraseñas no coinciden",
+    "passwordRequired": "La contraseña es obligatoria"
   },
   "footer": "Hecho con <hear></hear> por <rxtsel>@rxtsel</rxtsel>."
 }

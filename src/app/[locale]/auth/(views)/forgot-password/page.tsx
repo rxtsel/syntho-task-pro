@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   description: 'Recover your password in SyntoTask Pro to continue managing your tasks and projects.'
 }
 
-export default function AuthenticationPage() {
+const AuthenticationPage = () => {
   const t = useTranslations('auth.forgotPassword')
   return (
     <>
@@ -24,3 +24,5 @@ export default function AuthenticationPage() {
     </>
   )
 }
+
+export default AuthenticationPage

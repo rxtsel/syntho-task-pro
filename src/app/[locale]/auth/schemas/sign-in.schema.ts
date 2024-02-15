@@ -11,5 +11,5 @@ export const formSignInSchema = (t: T) =>
     email: z.string().email({
       message: t('messages.invalidEmail')
     }),
-    password: z.string()
+    password: z.string().min(2, { message: t('messages.passwordRequired') })
   })

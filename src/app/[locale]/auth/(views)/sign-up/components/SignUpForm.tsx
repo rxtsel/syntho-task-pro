@@ -4,68 +4,64 @@ import { Icons } from '@/components/icons'
 import { Button } from '@/components/ui/button'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { ROUTES } from '@/constants'
+import { signUp } from '@/services'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
 import { z } from 'zod'
-import { formSignUpSchema } from '../../schemas'
+import { formSignUpSchema } from '../../../schemas'
 
 export const SignUpForm = () => {
-  const isLoading = false
+  const [isLoading, setIsLoading] = useState(false)
   const t = useTranslations()
   const formSchema = formSignUpSchema(t)
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      firstName: '',
-      lastName: '',
       email: '',
       password: '',
       confirmPassword: ''
     }
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
-  }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values
 
+    try {
+      setIsLoading(true)
+      toast.loading('Loading...')
+      await signUp(email, password)
+      toast.success(`Hemos enviado un correo de confirmación a ${email}.`)
+      router.push(ROUTES.root)
+      form.reset()
+    } catch (error: any) {
+      setIsLoading(true)
+      if (error.response.status === 429) {
+        toast.error('Demasiados intentos. Por favor, intenta de nuevo en unos minutos.')
+        throw error
+      }
+
+      if (error.response.status === 400) {
+        toast.error('El correo ya está en uso.')
+        throw error
+      }
+
+      toast.error(error.response.data.error)
+    } finally {
+      toast.dismiss()
+      setIsLoading(false)
+    }
+  }
   return (
     <Form {...form}>
       <form className='space-y-8' onSubmit={form.handleSubmit(onSubmit)}>
         <div className='grid gap-2'>
-          <div className='grid md:grid-cols-2 gap-2 md:gap-1'>
-            <FormField
-              control={form.control}
-              name='firstName'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('messages.firstName')}</FormLabel>
-                  <FormControl>
-                    <Input autoFocus autoComplete='given-name' placeholder='John' {...field} />
-                  </FormControl>
-                  <FormMessage className='text-xs' />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name='lastName'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>{t('messages.lastName')}</FormLabel>
-                  <FormControl>
-                    <Input placeholder='Doe' autoComplete='family-name' {...field} />
-                  </FormControl>
-                  <FormMessage className='text-xs' />
-                </FormItem>
-              )}
-            />
-          </div>
           <FormField
             control={form.control}
             name='email'
@@ -117,7 +113,7 @@ export const SignUpForm = () => {
           />
         </div>
 
-        <Button className='w-full' type='submit'>
+        <Button disabled={isLoading} className='w-full' type='submit'>
           {t('buttons.auth.signUp')}
         </Button>
 

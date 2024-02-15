@@ -8,14 +8,19 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useTranslations } from 'next-intl'
+import { useRouter } from 'next/navigation'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { formSignInSchema } from '../../schemas'
+import { formSignInSchema } from '../../../schemas'
+import { toast } from 'sonner'
+import { login } from '@/services'
 
-export const SignInForm = () => {
+export const LoginForm = () => {
+  const [isLoading, setIsLoading] = useState(false)
+
   const t = useTranslations()
-
-  const isLoading = false
+  const router = useRouter()
 
   const formSchema = formSignInSchema(t)
 
@@ -27,11 +32,21 @@ export const SignInForm = () => {
     }
   })
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const { email, password } = values
+    try {
+      setIsLoading(true)
+      toast.loading('Loading...')
+      await login(email, password)
+      toast.success('Welcome back!')
+      router.refresh()
+    } catch (error: any) {
+      setIsLoading(true)
+      toast.error(error.code)
+    } finally {
+      toast.dismiss()
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -70,6 +85,7 @@ export const SignInForm = () => {
                 <FormControl>
                   <Input
                     type='password'
+                    id='password'
                     autoComplete='off'
                     placeholder='&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;'
                     {...field}

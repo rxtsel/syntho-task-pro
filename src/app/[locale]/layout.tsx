@@ -1,9 +1,11 @@
-import type { Metadata } from 'next'
-import '@/styles/globals.css'
-import { FC } from 'react'
-import { NextIntlClientProvider, useMessages } from 'next-intl'
-import type { TLanguage } from '@/types'
 import { ThemeProvider } from '@/components'
+import { ClientProviders } from '@/config'
+import '@/styles/globals.css'
+import type { TLanguage } from '@/types'
+import type { Metadata } from 'next'
+import { NextIntlClientProvider, useMessages } from 'next-intl'
+import { FC } from 'react'
+import { Toaster } from 'sonner'
 
 export const metadata: Metadata = {
   title: {
@@ -43,7 +45,8 @@ const RootLayout: FC<Props> = ({ children, params: { locale } }) => {
       <body>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute='class' defaultTheme='system' enableSystem>
-            {children}
+            <ClientProviders>{children}</ClientProviders>
+            <Toaster />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

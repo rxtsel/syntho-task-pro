@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Create an account in SyntoTask Pro to start managing your tasks and projects.'
 }
 
-export default function AuthenticationPage() {
+const AuthenticationPage = () => {
   const t = useTranslations()
   return (
     <>
@@ -40,3 +40,5 @@ export default function AuthenticationPage() {
     </>
   )
 }
+
+export default AuthenticationPage
