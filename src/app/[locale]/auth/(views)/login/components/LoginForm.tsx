@@ -42,7 +42,10 @@ export const LoginForm = () => {
       router.refresh()
     } catch (error: any) {
       setIsLoading(true)
-      toast.error(error.code)
+      if (error.response.status === 400) {
+        return toast.error('Invalid credentials')
+      }
+      toast.error(error.response.data.error)
     } finally {
       toast.dismiss()
       setIsLoading(false)
